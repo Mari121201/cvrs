@@ -520,7 +520,8 @@ const getTomorrow = () => {
 />
             </div>
             <p className="mt-1 text-xs text-gray-500 dark:text-gray-400">
-              Available: 9:00 AM - 5:00 PM, any day of the week
+              {/*Available: 9:00 AM - 5:00 PM, any day of the week*/}
+              Available: 24 Hours, any day of the week
               {formData.childId && bookedDates.length > 0 && (
                 <span className="block mt-1 text-amber-600 dark:text-amber-400">
                   ⚠ Dates with existing appointments are disabled

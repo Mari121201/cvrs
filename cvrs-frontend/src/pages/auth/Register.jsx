@@ -19,15 +19,44 @@ const Register = () => {
   const { register } = useAuth();
   const navigate = useNavigate();
 
+  // Helper to restrict name to letters, spaces, dots, and hyphens
+  const validateNameInput = (value) => {
+    return value.replace(/[^a-zA-Z\s\.\-]/g, '');
+  };
+
+  // Helper to restrict phone to digits only
+  const validatePhoneInput = (value) => {
+    return value.replace(/\D/g, '');
+  };
+
   const handleChange = (e) => {
+    const { name, value } = e.target;
+    let newValue = value;
+
+    if (name === 'name') {
+      newValue = validateNameInput(value).slice(0, 50); // max 50 chars
+    }
+    if (name === 'phone') {
+      newValue = validatePhoneInput(value).slice(0, 10); // max 10 digits
+    }
+    if (name === 'password' || name === 'confirmPassword') {
+      newValue = value.slice(0, 20); // max 20 chars
+    }
+    if (name === 'email') {
+      newValue = value.slice(0, 100); // max 100 chars
+    }
+    if (name === 'address') {
+      newValue = value.slice(0, 200); // max 200 chars
+    }
+
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [name]: newValue
     });
-    if (errors[e.target.name]) {
+    if (errors[name]) {
       setErrors({
         ...errors,
-        [e.target.name]: null
+        [name]: null
       });
     }
   };
@@ -37,6 +66,8 @@ const Register = () => {
     
     if (!formData.name.trim()) {
       newErrors.name = 'Full name is required';
+    } else if (formData.name.trim().length < 2) {
+      newErrors.name = 'Name must be at least 2 characters';
     }
     
     if (!formData.email) {
@@ -55,8 +86,10 @@ const Register = () => {
       newErrors.confirmPassword = 'Passwords do not match';
     }
     
-    if (formData.phone && !/^\d{10}$/.test(formData.phone.replace(/\D/g, ''))) {
-      newErrors.phone = 'Please enter a valid phone number';
+    if (formData.phone && formData.phone.length > 0) {
+      if (formData.phone.length !== 10) {
+        newErrors.phone = 'Phone number must be exactly 10 digits';
+      }
     }
     
     setErrors(newErrors);
@@ -73,7 +106,7 @@ const Register = () => {
     setLoading(true);
     
     const result = await register({
-      name: formData.name,
+      name: formData.name.trim(),
       email: formData.email,
       password: formData.password,
       phone: formData.phone,
@@ -129,6 +162,7 @@ const Register = () => {
                   name="name"
                   type="text"
                   required
+                  maxLength={50}
                   value={formData.name}
                   onChange={handleChange}
                   className={`pl-10 w-full px-4 py-2 border ${
@@ -157,6 +191,7 @@ const Register = () => {
                   type="email"
                   autoComplete="email"
                   required
+                  maxLength={100}
                   value={formData.email}
                   onChange={handleChange}
                   className={`pl-10 w-full px-4 py-2 border ${
@@ -183,12 +218,13 @@ const Register = () => {
                   id="phone"
                   name="phone"
                   type="tel"
+                  maxLength={10}
                   value={formData.phone}
                   onChange={handleChange}
                   className={`pl-10 w-full px-4 py-2 border ${
                     errors.phone ? 'border-red-500 dark:border-red-500' : 'border-gray-300 dark:border-gray-600'
                   } rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-transparent dark:bg-gray-700 dark:text-white`}
-                  placeholder="Enter your phone number"
+                  placeholder="Enter 10-digit mobile number"
                 />
               </div>
               {errors.phone && (
@@ -210,6 +246,7 @@ const Register = () => {
                   name="password"
                   type="password"
                   required
+                  maxLength={20}
                   value={formData.password}
                   onChange={handleChange}
                   className={`pl-10 w-full px-4 py-2 border ${
@@ -237,6 +274,7 @@ const Register = () => {
                   name="confirmPassword"
                   type="password"
                   required
+                  maxLength={20}
                   value={formData.confirmPassword}
                   onChange={handleChange}
                   className={`pl-10 w-full px-4 py-2 border ${
@@ -263,6 +301,7 @@ const Register = () => {
                   id="address"
                   name="address"
                   rows="2"
+                  maxLength={200}
                   value={formData.address}
                   onChange={handleChange}
                   className="pl-10 w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 dark:focus:ring-primary-400 focus:border-transparent dark:bg-gray-700 dark:text-white"

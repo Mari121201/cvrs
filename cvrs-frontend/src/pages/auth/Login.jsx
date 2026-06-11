@@ -57,7 +57,7 @@ const Login = () => {
             Welcome to CVRS
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600 dark:text-gray-400">
-            Child Vaccination Record System
+            Child Vaccination Reminder System
           </p>
         </div>
         

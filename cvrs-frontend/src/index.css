@@ -370,3 +370,12 @@
   background-color: #9b2c2c !important;
   color: #fed7d7 !important;
 }
+
+/* Prevent body scroll when drawer is open */
+.body-no-scroll {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  /* Optional: prevents layout shift when scrollbar disappears */
+  padding-right: var(--scrollbar-width, 0px);
+}

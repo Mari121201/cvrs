@@ -224,25 +224,25 @@ const AddChild = () => {
         </form>
       </div>
 
-      {/* Information Card */}
-      <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-        <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-2">Important Information</h3>
-        <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-1">
-          <li className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></span>
-            <span className="font-medium">Mandatory fields:</span> Name, Date of Birth, and Gender are required
+            {/* Information Card */}
+      <div className="mt-6 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4 sm:p-5">
+        <h3 className="text-sm font-medium text-blue-800 dark:text-blue-300 mb-3">Important Information</h3>
+        <ul className="text-sm text-blue-700 dark:text-blue-400 space-y-2">
+          <li className="flex items-start gap-2">
+            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></span>
+            <span><span className="font-medium">Mandatory fields:</span> Name, Date of Birth, and Gender are required</span>
           </li>
-          <li className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></span>
-            <span className="font-medium">Optional fields:</span> Blood Group and Birth Weight can be added later
+          <li className="flex items-start gap-2">
+            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></span>
+            <span><span className="font-medium">Optional fields:</span> Blood Group and Birth Weight can be added later</span>
           </li>
-          <li className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></span>
-            Vaccination schedules will be automatically created based on your child's date of birth
+          <li className="flex items-start gap-2">
+            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></span>
+            <span>Vaccination schedules will be automatically created based on your child's date of birth</span>
           </li>
-          <li className="flex items-center gap-2">
-            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></span>
-            You'll receive notifications for upcoming vaccinations
+          <li className="flex items-start gap-2">
+            <span className="h-1.5 w-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mt-1.5 flex-shrink-0"></span>
+            <span>You'll receive notifications for upcoming vaccinations</span>
           </li>
         </ul>
       </div>
